@@ -3,6 +3,9 @@ package com.example.telefon_buch.Data
 import com.example.telefon_buch.R
 
 object KontaktList {
+
+    private val contacts = mutableListOf<Kontakt>()
+
     fun getContacts(): List<Kontakt> {
         return listOf(
             Kontakt(
@@ -27,5 +30,11 @@ object KontaktList {
             )
             // Füge weitere Kontakte nach Bedarf hinzu
         )
+        return contacts
     }
+
+    fun addContact(newContact: Kontakt) {
+        contacts.add(newContact)
+    }
+
 }

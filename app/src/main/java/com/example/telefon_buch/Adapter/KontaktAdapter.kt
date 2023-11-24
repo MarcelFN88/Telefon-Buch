@@ -13,7 +13,8 @@ import com.example.telefon_buch.Data.Kontakt
 import com.example.telefon_buch.Data.KontaktTyp
 
 
-class KontaktAdapter(private val contactList: List<Kontakt>) : RecyclerView.Adapter<KontaktAdapter.ViewHolder>() {
+class KontaktAdapter(private var contactList: List<Kontakt>) :
+    RecyclerView.Adapter<KontaktAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameTextView: TextView = view.findViewById(R.id.contactName)
@@ -26,7 +27,7 @@ class KontaktAdapter(private val contactList: List<Kontakt>) : RecyclerView.Adap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.contact_item, parent, false)
+            .inflate(R.layout.kontakt_item, parent, false)
         return ViewHolder(view)
     }
 
@@ -41,16 +42,24 @@ class KontaktAdapter(private val contactList: List<Kontakt>) : RecyclerView.Adap
 
         val contactTypeSpinner: Spinner = holder.itemView.findViewById(R.id.KontaktTyp)
         val contactTypes = KontaktTyp.values().map { it.name }
-        val spinnerAdapter = ArrayAdapter(holder.itemView.context, android.R.layout.simple_spinner_item, contactTypes)
+        val spinnerAdapter = ArrayAdapter(
+            holder.itemView.context,
+            android.R.layout.simple_spinner_item,
+            contactTypes
+        )
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         contactTypeSpinner.adapter = spinnerAdapter
 
-        // Set current selection
+
         contactTypeSpinner.setSelection(contactTypes.indexOf(contact.contactType.name))
 
-        // Handle Spinner selection changes
         contactTypeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
                 // Update the contact type based on selection
                 val selectedType = KontaktTyp.valueOf(contactTypes[position])
                 contact.contactType = selectedType
@@ -63,4 +72,8 @@ class KontaktAdapter(private val contactList: List<Kontakt>) : RecyclerView.Adap
     }
 
     override fun getItemCount() = contactList.size
+    fun updateContacts(newContacts: List<Kontakt>) {
+        contactList = newContacts
+        notifyDataSetChanged()
+    }
 }

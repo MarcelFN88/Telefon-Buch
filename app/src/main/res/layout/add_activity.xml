@@ -6,73 +6,78 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Name -->
+
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Name"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toTopOf="parent"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Nachname -->
     <EditText
         android:id="@+id/editTextSurname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Nachname"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@id/editTextName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/editTextName" />
 
-    <!-- Telefonnummer -->
+
     <EditText
         android:id="@+id/editTextPhone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Telefonnummer"
         android:inputType="phone"
-        app:layout_constraintTop_toBottomOf="@id/editTextSurname"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/editTextSurname" />
 
-    <!-- E-Mail -->
+
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="E-Mail"
         android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@id/editTextPhone"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/editTextPhone" />
 
-    <!-- Adresse -->
+
     <EditText
         android:id="@+id/editTextAddress"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Adresse"
         android:inputType="textPostalAddress"
-        app:layout_constraintTop_toBottomOf="@id/editTextEmail"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/editTextEmail" />
 
-    <!-- Geburtstag -->
+
     <EditText
         android:id="@+id/editTextBirthday"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Geburtstag"
         android:inputType="date"
-        app:layout_constraintTop_toBottomOf="@id/editTextAddress"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/editTextAddress" />
 
-    <!-- Kamera-Button -->
+
     <Button
         android:id="@+id/buttonOpenCamera"
         android:layout_width="wrap_content"
@@ -82,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Speichern-Button -->
+
     <Button
         android:id="@+id/buttonSaveContact"
         android:layout_width="wrap_content"

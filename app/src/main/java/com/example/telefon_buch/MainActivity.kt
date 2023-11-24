@@ -12,11 +12,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var contactsRecyclerView: RecyclerView
     private lateinit var kontaktAdapter: KontaktAdapter
+    private lateinit var adapter: KontaktAdapter
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        recyclerView = findViewById(R.id.contactsRecyclerView)
+        adapter = KontaktAdapter(KontaktList.getContacts())
+        recyclerView.adapter = adapter
 
         contactsRecyclerView = findViewById(R.id.contactsRecyclerView)
         contactsRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -31,7 +36,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addContact() {
-        val intent = Intent(this, AddContactActivity::class.java)
+        val intent = Intent(this, AddMainActivity::class.java)
         startActivity(intent)
     }
 
@@ -42,5 +47,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun sortContacts() {
         // Logic to sort contacts
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adapter.updateContacts(KontaktList.getContacts())
     }
 }

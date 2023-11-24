@@ -3,7 +3,6 @@ package com.example.telefon_buch
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Button
@@ -12,16 +11,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.telefon_buch.Data.Kontakt
+import com.example.telefon_buch.Data.KontaktList
 import com.example.telefon_buch.Data.KontaktTyp
 
-class AddContactActivity : AppCompatActivity() {
+class AddMainActivity : AppCompatActivity() {
 
-    // Request-Code für die Kamera-Intent
     private val REQUEST_IMAGE_CAPTURE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.addcontactactivity)
+        setContentView(R.layout.add_activity)
 
         findViewById<Button>(R.id.buttonOpenCamera).setOnClickListener {
             openCamera()
@@ -33,32 +32,35 @@ class AddContactActivity : AppCompatActivity() {
     }
 
     private fun openCamera() {
-        // Überprüfen, ob die Kamera-Berechtigung gewährt wurde
+
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
-            != PackageManager.PERMISSION_GRANTED) {
-            // Berechtigung anfordern, falls sie noch nicht gewährt wurde
-            ActivityCompat.requestPermissions(this,
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
                 arrayOf(android.Manifest.permission.CAMERA),
-                REQUEST_IMAGE_CAPTURE)
+                REQUEST_IMAGE_CAPTURE
+            )
         } else {
-            // Kamera-Intent starten
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             try {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
             } catch (e: ActivityNotFoundException) {
-                // Fehlerbehandlung, falls keine Kamera-App verfügbar ist
+
             }
         }
     }
-    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>, grantResults: IntArray) {
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>, grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             REQUEST_IMAGE_CAPTURE -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     openCamera()
                 } else {
-                    // Berechtigung wurde verweigert. Benutzer darüber informieren.
                 }
                 return
             }
@@ -68,20 +70,25 @@ class AddContactActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            // Bitmap des Fotos verarbeiten oder anzeigen
+
         }
     }
 
     private fun saveContact() {
         val name = findViewById<EditText>(R.id.editTextName).text.toString()
         val surname = findViewById<EditText>(R.id.editTextSurname).text.toString()
-        // Weitere EditText-Felder auslesen
+        val phone = findViewById<EditText>(R.id.editTextPhone).text.toString()
+        val email = findViewById<EditText>(R.id.editTextEmail).text.toString()
+        val address = findViewById<EditText>(R.id.editTextAddress).text.toString()
+        val photoResId = 0
+        val birthday = findViewById<EditText>(R.id.editTextBirthday).text.toString()
 
-        // Erstellen Sie ein Kontakt-Objekt mit diesen Daten
-        val newContact = Kontakt(name, surname, "", "", "", KontaktTyp.Freund, photoResId = 0,"")
 
-        // Speichern Sie den neuen Kontakt in after Datenquelle (Datenbank, Liste, etc.)
+        val newContact = Kontakt(name, surname, phone,email,address, KontaktTyp.Bekannter, photoResId, birthday)
+        KontaktList.addContact(newContact)
+
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
-
 }
