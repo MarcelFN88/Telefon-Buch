@@ -20,12 +20,13 @@
         android:id="@+id/contactsRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/buttonContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/addressBookTitle"
         tools:listitem="@layout/contact_item"
-        app:layout_constraintTop_toBottomOf="@+id/addressBookTitle" />
+    />
 
     <LinearLayout
         android:id="@+id/buttonContainer"
@@ -38,21 +39,21 @@
             android:id="@+id/addButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Hinzufügen" />
+            android:layout_weight="1"
+            android:text="Kontakt +" />
 
         <Button
             android:id="@+id/deleteButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="Löschen" />
 
         <Button
             android:id="@+id/sortButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="Sortieren" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
