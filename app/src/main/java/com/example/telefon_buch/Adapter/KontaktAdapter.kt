@@ -41,7 +41,7 @@ class KontaktAdapter(private var contactList: List<Kontakt>) :
         holder.birthdayTextView.text = contact.birthday
 
         val contactTypeSpinner: Spinner = holder.itemView.findViewById(R.id.KontaktTyp)
-        val contactTypes = KontaktTyp.values().map { it.name }
+        val contactTypes = KontaktTyp.entries.map { it.name }
         val spinnerAdapter = ArrayAdapter(
             holder.itemView.context,
             android.R.layout.simple_spinner_item,
@@ -60,13 +60,12 @@ class KontaktAdapter(private var contactList: List<Kontakt>) :
                 position: Int,
                 id: Long
             ) {
-                // Update the contact type based on selection
+
                 val selectedType = KontaktTyp.valueOf(contactTypes[position])
                 contact.contactType = selectedType
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                // Optional: Handle no selection
             }
         }
     }
